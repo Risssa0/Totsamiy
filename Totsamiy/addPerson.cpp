@@ -21,8 +21,28 @@ void addPerson(Person*& arr, int& size) {
     std::cout << "Введите комплектацию: ";
     std::getline(std::cin, newPerson.сomplect);
 
-    std::cout << "Введите Ф.И.О: ";
-    std::getline(std::cin, newPerson.fio);
+    std::string inputFio;
+    bool containsDigits = false;
+
+    do {
+        std::cout << "Введите Ф.И.О: ";
+        std::getline(std::cin, inputFio);
+        containsDigits = false;
+
+        for (char c : inputFio) {
+            if (std::isdigit(c)) {
+                containsDigits = true;
+                break;
+            }
+        }
+
+        if (containsDigits) {
+            std::cout << "Ф.И.О не должно содержать цифры. Попробуйте снова." << std::endl;
+        }
+
+    } while (containsDigits);
+
+    newPerson.fio = inputFio;
 
     do {
         std::cout << "Введите цену: ";
